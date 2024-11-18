@@ -1,150 +1,134 @@
+# JSON Form Playground
 
-# Dynamic Form Generator
-
-This is a dynamic form generator application that takes a JSON schema as input and generates a styled, functional form in real-time. The application features a JSON editor on the left and a form preview on the right. The form updates in real-time as the JSON is edited. This project is built using React, TypeScript, Tailwind CSS, and React Hook Form.
+JSON Form Playground is an intuitive tool that converts JSON schemas into interactive, dynamic forms. It allows you to create and edit JSON schemas in a user-friendly editor and instantly preview the corresponding form.
 
 ## Features
-- **JSON Schema Editor**: A real-time JSON editor with syntax highlighting and validation.
-- **Dynamic Form Generation**: The form updates in real-time as the JSON schema is edited.
-- **Field Types Support**: Supports various field types like text, email, select, radio, and textarea.
-- **Form Validation**: Displays error messages for required fields and custom validation (e.g., pattern matching for email).
-- **Form Submission**: Submits the form data and logs it to the console with a success message.
-- **Responsive Layout**: The form is mobile-responsive, with the editor and form stacked on smaller screens.
-- **Styled with Tailwind CSS**: Consistent styling using Tailwind CSS.
-- **Real-Time Updates**: Both the editor and form preview are updated instantly.
+
+- **JSON Schema Editor**: Edit your form's structure using JSON in a dedicated editor.
+- **Dynamic Form Generator**: Visualize your JSON schema as a live form.
+- **Field Support**:
+  - Text, Email, Phone, Select, Textarea, File, Date, etc.
+  - Validation for patterns, required fields, and custom placeholders.
+- **Real-time Updates**: Forms dynamically update as you edit the JSON schema.
+- **Responsive Design**: Fully responsive layout for desktop and mobile screens.
+- **Theming**: Clean, professional UI with Tailwind CSS.
+
+---
 
 ## Demo
 
-A live version of the app can be viewed [here](#).
+https://json-form-playground.vercel.app/
 
-## Requirements
+---
 
-- Node.js (v16.0 or higher)
-- npm or yarn
+## Installation
 
-## Getting Started
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/json-form-playground.git
+   cd json-form-playground
+   ```
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/dynamic-form-generator.git
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run the application:
+   ```bash
+   npm start
+   ```
+
+4. Open your browser and navigate to `http://localhost:3000`.
+
+---
+
+## Folder Structure
+
+```plaintext
+.
+├── public/             # Public assets
+├── src/
+│   ├── components/
+│   │   ├── JsonEditor.tsx      # JSON Schema editor
+│   │   ├── FormGenerator.tsx   # Form generation logic
+│   │   └── FieldRenderer.tsx   # Renders individual fields dynamically
+│   ├── App.tsx                # Main application logic
+│   ├── index.tsx              # React entry point
+│   └── styles/                # Tailwind and custom styles
+├── README.md           # Project documentation
+├── package.json        # Dependencies and scripts
+└── tailwind.config.js  # Tailwind CSS configuration
 ```
 
-### 2. Install Dependencies
-Navigate to the project directory and install the necessary dependencies.
+---
 
-```bash
-cd dynamic-form-generator
-npm install
-```
-or
-```bash
-yarn install
-```
+## Usage
 
-### 3. Run the Application
-Start the development server.
+1. **Edit JSON Schema**:
+   - Update the schema in the **JSON Editor** (left pane).
+   - Fields like `id`, `type`, `label`, `required`, and `placeholder` define the form structure.
 
-```bash
-npm start
-```
-or
-```bash
-yarn start
-```
+2. **Preview Live Form**:
+   - The **Form Generator** (right pane) renders the form based on your JSON schema.
 
-The application will be available at `http://localhost:3000`.
-
-## Project Structure
-
-```
-/src
-  /components
-    - FormGenerator.tsx    # Component for rendering the generated form
-    - JsonEditor.tsx       # Component for editing the JSON schema
-  /hooks
-    - useJsonValidation.ts # Custom hook for validating JSON schema
-  index.css                # Global styles
-  App.tsx                  # Main component containing the split-screen layout
-  index.tsx                # Entry point for React app
-  tailwind.config.js       # Tailwind CSS configuration
-  tsconfig.json            # TypeScript configuration
-```
-
-## Example JSON Schema
+### Example JSON Schema
 
 ```json
 {
-  "formTitle": "Project Requirements Survey",
-  "formDescription": "Please fill out this survey about your project needs",
+  "formTitle": "Feedback Form",
   "fields": [
     {
       "id": "name",
       "type": "text",
-      "label": "Full Name",
+      "label": "Name",
       "required": true,
-      "placeholder": "Enter your full name"
+      "placeholder": "Enter your name"
     },
     {
-      "id": "email",
-      "type": "email",
-      "label": "Email Address",
-      "required": true,
-      "placeholder": "you@example.com",
-      "validation": {
-        "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
-        "message": "Please enter a valid email address"
-      }
-    },
-    {
-      "id": "companySize",
+      "id": "rating",
       "type": "select",
-      "label": "Company Size",
+      "label": "Rating",
       "required": true,
       "options": [
-        { "value": "1-50", "label": "1-50 employees" },
-        { "value": "51-200", "label": "51-200 employees" },
-        { "value": "201-1000", "label": "201-1000 employees" },
-        { "value": "1000+", "label": "1000+ employees" }
+        { "label": "Excellent", "value": "5" },
+        { "label": "Good", "value": "4" },
+        { "label": "Average", "value": "3" },
+        { "label": "Poor", "value": "2" },
+        { "label": "Terrible", "value": "1" }
       ]
+    },
+    {
+      "id": "comments",
+      "type": "textarea",
+      "label": "Comments",
+      "placeholder": "Share your thoughts..."
     }
   ]
 }
 ```
 
-### Fields:
-- **id**: The unique identifier for the field (used for form handling).
-- **type**: The field type (`text`, `email`, `select`, `textarea`, etc.).
-- **label**: The label displayed next to the field.
-- **required**: Boolean flag to indicate if the field is required.
-- **validation**: Custom validation for fields like email (optional).
-- **options**: For `select` and `radio` field types, an array of options to choose from.
+---
 
-## Testing
+## Dependencies
 
-### 1. Unit Tests
-Unit tests are written using Jest. To run the tests, execute:
+- **React**: Frontend framework for building the app.
+- **Tailwind CSS**: For styling and layout.
+- **TypeScript**: Type-safe JavaScript for better development.
+- **Ace Editor**: JSON code editing experience.
 
-```bash
-npm test
-```
-or
-```bash
-yarn test
-```
+---
 
-### 2. E2E Tests
-End-to-end tests using Playwright are included. To run the E2E tests, use:
+## Contribution
 
-```bash
-npx playwright test
-```
+Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request.
 
-## Deployment
+1. Fork this repository.
+2. Create a new branch: `git checkout -b feature-branch-name`.
+3. Commit your changes: `git commit -m "Description of changes"`.
+4. Push the branch: `git push origin feature-branch-name`.
+5. Open a pull request.
 
-You can deploy this project on Vercel or Netlify.
+---
 
-## Future Enhancements
-
-- **Copy Form JSON Button**: Add a button to copy the generated JSON schema.
-- **Dark Mode Support**: Implement a dark mode toggle.
-- **Download Submissions**: Allow users to download form submissions as JSON files.
+### Crafted with ❤️ by [Saumya Jain](mailto:jainsaumya012@gmail.com).
